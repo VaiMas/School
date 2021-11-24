@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Subjects:</h1>
+  {% if subject_grade_list %}
+  <ul>
+    {% for subject in subject_grade_list %}
+      <li>
+        <a href="{{ subject_grade_id }}">{{ subject.student.fname }} {{ subject.student.lname }} {{ subject.subject.name }} {{ subject.grade.grade }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+{% endblock %}

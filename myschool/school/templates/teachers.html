@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Our teachers:</h1>
+  {% for teacher in teachers %}
+    <li><a href="{% url 'teacher' teacher.id %}">{{teacher.fname}} {{teacher.lname}}</a></li>
+    {% endfor %}
+{% endblock %}

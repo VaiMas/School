@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Our students:</h1>
+  {% for student in students %}
+    <li>{{student.fname}} {{student.lname}} Parents: {{student.parent.fname}} {{student.parent.lname}}</li>
+    {% endfor %}
+{% endblock %}
