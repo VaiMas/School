@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Search for "{{query}}" results:</h1>
+  </br>
+  {% if students %}
+  <ul>
+    {% for student in students %}
+      <li>
+        <a href="{{ student.id }}">{{ student.fname }} {{ student.lname }}</a> ({{student.parent.fname}} {{student.parent.lname}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>Oops. Didn't find anything :(</p>
+  {% endif %}
+
+  {% endblock %}
