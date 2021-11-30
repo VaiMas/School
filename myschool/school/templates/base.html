@@ -12,9 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Offside&display=swap" rel="stylesheet">
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
 </head>
 <body>
-<nav class="navbar navbar-expand-sm navbar-light" >
+<nav class="navbar navbar-expand-sm navbar-dark" >
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -23,13 +24,13 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'teachers' %}">Teacher</a>
+        <a class="nav-link" href="{% url 'teachers'%}">Teacher</a>
       </li>
         <li class="nav-item">
-        <a class="nav-link" href="{% url 'students' %}">Student</a>
+        <a class="nav-link" href="/">Student</a>
       </li>
         </ul>
       {% if user.is_authenticated %}
@@ -41,15 +42,15 @@
           </svg>
 
           {{ user.get_username }}</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">My grades</a></li>
-      <li class="nav-item"><a class="nav-link" href="{% url 'logout'%}?next=/school">Logout</a></li>
+      <li class="nav-item"><a class="nav-link" href="{% url 'my-grades' %}">My grades</a></li>
+      <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}?next=/school">Logout</a></li>
           {% else %}
           <div class="collapse navbar-collapse">
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-      <li class="nav-item "><a class="nav-link" href="{% url 'login'%}?next={{request.path}}">Login</a></li></ul></div>
+      <li class="nav-item "><a class="nav-link" href="{% url 'login' %}?next={{request.path}}">Login</a></li></ul></div>
           {% endif %}
       </ul></div>
-    <form action="{% url 'search' %}" method="get" class="form-inline my-2 my-lg-0">
+    <form action="/" method="get" class="form-inline my-2 my-lg-0">
       <input name="query" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>

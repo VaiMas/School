@@ -6,9 +6,11 @@
   <ul>
     {% for subject in subject_grade_list %}
       <li>
-        <a href="{{ subject_grade_id }}">{{ subject.student.fname }} {{ subject.student.lname }} {{ subject.subject.name }} {{ subject.grade.grade }}</a>
+        <a href="{{ subject_grade_id }}">{{ subject.student.fname }} {{ subject.student.lname }} {{ subject.subject.name }} {{ subject.grade.grade }} {{ teacher }}</a>
+
       </li>
     {% endfor %}
   </ul>
   {% endif %}
+
 {% endblock %}

@@ -1,6 +1,8 @@
 from django.apps import AppConfig
 
 
-class SchoolConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'school'
+# class SchoolAppConfig(AppConfig):
+#     name = 'school'
+#
+#     def ready(self):
+#         from .signals import create_profile, save_profile
