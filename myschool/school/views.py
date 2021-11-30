@@ -1,14 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 # from .forms import CustomUserChangeForm, ProfileUpdateForm
 from django.contrib import messages
 from django . http import HttpResponse
-from . models import Teacher_subject, Subject_grade, Lesson
+from . models import Teacher_subject, Subject_grade, Lesson, Student_lessons
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
+
 User = get_user_model()
 
 def index(request):
@@ -91,10 +92,10 @@ class LessonListView(generic.ListView):
 #     #     context['parent_list'] = Parent.objects.all()
 #     #     return context
 #
-# def search(request):
-#     query = request.GET.get('query')
-#     search_results = Student.objects.filter(Q(fname__icontains=query) | Q(lname__icontains=query))
-#     return render(request, 'search.html', {'students': search_results, 'query': query})
+def search(request):
+    query = request.GET.get('query')
+    search_results = User.objects.filter(Q(fname__icontains=query) | Q(lname__icontains=query))
+    return render(request, 'search.html', {'users': search_results, 'query': query})
 #
 class GradesByUserListView(LoginRequiredMixin, generic.ListView):
     model = Subject_grade
@@ -110,3 +111,22 @@ class GradesByUserListView(LoginRequiredMixin, generic.ListView):
         # And so on for more models
         return context
 
+class LessonsByUserListView(LoginRequiredMixin, generic.ListView):
+    model = Teacher_subject
+    template_name = 'user_lessons.html'
+
+    def get_queryset(self):
+        return Teacher_subject.objects.filter(teacher=self.request.user).filter()
+
+
+    def get_context_data(self, **kwargs):
+        context = super(LessonsByUserListView, self).get_context_data(**kwargs)
+        context['sname'] = User.objects.filter(user_type='S').first().fname
+        context['lname'] = User.objects.filter(user_type='S').first().lname
+        context['grade'] = Subject_grade.objects.all().first().grade
+        # And so on for more models
+        return context
+
+    def form_valid(self, form):
+        form.instance.teacher = self.request.user(user_type='T')
+        return super().form_valid(form)

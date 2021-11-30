@@ -2,11 +2,11 @@
 {% block content %}
   <h1>Search for "{{query}}" results:</h1>
   </br>
-  {% if students %}
+  {% if users %}
   <ul>
-    {% for student in students %}
+    {% for user in users %}
       <li>
-        <a href="{{ student.id }}">{{ student.fname }} {{ student.lname }}</a> ({{student.parent.fname}} {{student.parent.lname}})
+        <a>{{ user.fname }} {{ user.lname }}</a>
       </li>
     {% endfor %}
   </ul>
