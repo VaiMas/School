@@ -1,9 +1,9 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.base_user import BaseUserManager
-from PIL import Image
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.contrib.auth import get_user_model
+from PIL import Image
 
 class CustomUserManager(BaseUserManager):
     """
@@ -86,7 +86,7 @@ User = get_user_model()
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    photo = models.ImageField(default="default.png", upload_to="profile_pics")
+    photo = models.ImageField(default="default.png",upload_to="profile_pics")
 
     def __str__(self):
         return f"{self.user} profile"
@@ -102,8 +102,10 @@ class Profile(models.Model):
 # Create your models here.
 class Subject(models.Model):
     name = models.CharField(verbose_name="Name", max_length=150)
+    teachers = models.ManyToManyField(User, related_name='follows_subjects')
 
     def __str__(self):
+        teacher_names = ', '.join(t.fname for t in self.teachers.all())
         return self.name
 
     class Meta:
@@ -111,20 +113,9 @@ class Subject(models.Model):
         verbose_name_plural = 'Subjects'
 
 
-class Teacher_subject(models.Model):
-    teacher = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name='subjects')
-    subject = models.ForeignKey('Subject', verbose_name='Subject', on_delete=models.CASCADE, null=True, blank=True)
-
-    def __str__(self):
-        return f"{self.teacher} {self.subject}"
-
-    class Meta:
-        verbose_name = "Teacher's subject"
-        verbose_name_plural = "Teacher's subjects"
-
 
 class Subject_grade(models.Model):
-    subject = models.ForeignKey('Subject', verbose_name='Subject', on_delete=models.CASCADE, null=True, blank=True , related_name='teachers')
+    subject = models.ForeignKey('Subject', verbose_name='Subject', on_delete=models.CASCADE, null=True, blank=True)
     student = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     GRADE = (
@@ -156,25 +147,17 @@ class Subject_grade(models.Model):
 
 
 class Lesson(models.Model):
-    teacher_subject = models.ForeignKey('Teacher_subject', verbose_name='Teacher subject', on_delete=models.CASCADE, null=True, blank=True)
+    subject = models.ForeignKey('Subject', verbose_name='Subject', on_delete=models.CASCADE, null=True, blank=True)
+    student = models.ManyToManyField(User, related_name='follows_lessons')
 
-    def __str__(self):
-        return f"{self.teacher_subject.teacher.fname} {self.teacher_subject.teacher.lname} {self.teacher_subject.subject.name}"
+    # def __str__(self):
+    #     return f"{self.teacher_subject.teacher.fname} {self.teacher_subject.teacher.lname} {self.teacher_subject.subject} "
 
     class Meta:
         verbose_name = 'Lesson'
         verbose_name_plural = 'Lessons'
 
-class Student_lessons(models.Model):
-    lesson = models.ForeignKey('Lesson', verbose_name='Lesson', on_delete=models.CASCADE, null=True, blank=True)
-    student = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
-    def __str__(self):
-        return f"{self.student.fname} {self.student.lname}"
-
-    class Meta:
-        verbose_name = 'Student lesson'
-        verbose_name_plural = 'Student lesssons'
 
 
 

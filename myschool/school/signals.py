@@ -5,15 +5,15 @@ from .models import Profile
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
-# # Sukūrus vartotoją automatiškai sukuriamas ir profilis.
-# @receiver(post_save, sender=User) # jeigu išsaugojamas User objektas, inicijuojama f-ja po dekoratoriumi
-# def create_profile(sender, instance, created, **kwargs): # instance yra ką tik sukurtas User objektas.
-#     if created:
-#         Profile.objects.create(user=instance)
-#         print('KWARGS: ', kwargs)
-#
-#
-# # Pakoregavus vartotoją, išsaugomas ir profilis
-# @receiver(post_save, sender=User)
-# def save_profile(sender, instance, **kwargs):
-#     instance.profile.save()
+# Sukūrus vartotoją automatiškai sukuriamas ir profilis.
+@receiver(post_save, sender=User) # jeigu išsaugojamas User objektas, inicijuojama f-ja po dekoratoriumi
+def create_profile(sender, instance, created, **kwargs): # instance yra ką tik sukurtas User objektas.
+    if created:
+        Profile.objects.create(user=instance)
+        print('KWARGS: ', kwargs)
+
+
+# Pakoregavus vartotoją, išsaugomas ir profilis
+@receiver(post_save, sender=User)
+def save_profile(sender, instance, **kwargs):
+    instance.profile.save()

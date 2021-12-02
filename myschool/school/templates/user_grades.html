@@ -24,9 +24,11 @@
                         {% for subject in subject_grade_list %}
                         <td>{{ subject.student.fname }}</td>
                         <td>{{ subject.student.lname }}</td>
-                        <td>{{ subject.subject.name }}</td>
+                        <td>{{ subject.subject }}</td>
                         <td>{{ subject.grade }}</td>
-                        <td>{{ teacher }}</td>
+                        {% for teacher in subject.subject.teachers.all %}
+                        <td>{{ teacher.fname }} {{ teacher.lname }}</td>
+                        {% endfor %}
                     </tr>
                     {% endfor %}
                     </tbody>
@@ -35,5 +37,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}

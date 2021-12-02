@@ -1,6 +1,6 @@
 from django.contrib import admin
 # from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser, Lesson, Student_lessons, Subject, Subject_grade, Teacher_subject
+from .models import CustomUser, Lesson, Subject, Subject_grade, Profile
 from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
@@ -28,7 +28,8 @@ class CustomUserAdmin(UserAdmin):
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Lesson)
 admin.site.register(Subject)
-admin.site.register(Student_lessons)
+
 admin.site.register(Subject_grade)
-admin.site.register(Teacher_subject)
+
+admin.site.register(Profile)
 

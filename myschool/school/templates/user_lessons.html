@@ -19,12 +19,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        {% for teacher in teacher_subject_list %}
-                        <td>{{ sname }}</td>
-                        <td>{{ lname }}</td>
-                        <td>{{ teacher.subject }}</td>
-                        <td>{{ grade }}</td>
+
+                        {% for subject in teacher.follows_subjects.all %}
+                            {% for subject_grade in subject.subject_grade_set.all %}
+                        <tr>
+                                <td>{{ subject_grade.subject.name }}</td>
+                                <td>{{ subject_grade.student.fname }}</td>
+                                <td>{{ subject_grade.student.lname }}</td>
+                                <td>{{ subject_grade.grade }}</td>
+                        </tr>
+                            {% endfor %}
+
                     </tr>
                     {% endfor %}
 
