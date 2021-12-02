@@ -45,7 +45,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     USER_CHOICES = [
         ('T', 'Teacher'),
-        ('P', 'Parent'),
         ('S', 'Student')
     ]
 
@@ -62,11 +61,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         else:
             return False
 
-    def is_parent(self):
-        if self.user_type == 'P':
-            return True
-        else:
-            return False
 
     def is_student(self):
         if self.user_type == 'S':
@@ -117,6 +111,7 @@ class Subject(models.Model):
 class Subject_grade(models.Model):
     subject = models.ForeignKey('Subject', verbose_name='Subject', on_delete=models.CASCADE, null=True, blank=True)
     student = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    date = models.DateField(verbose_name='Date', null=True, blank=True)
 
     GRADE = (
         (1, '1'),
@@ -139,11 +134,12 @@ class Subject_grade(models.Model):
     )
 
     def __str__(self):
-        return f"{self.student.fname} {self.student.lname} {self.subject.name} {self.grade}"
+        return f"{self.student.fname} {self.student.lname} {self.subject.name} {self.grade} {self.date}"
 
     class Meta:
         verbose_name = "Subject grade"
         verbose_name_plural = 'Subject grades'
+        ordering = ['-date']
 
 
 class Lesson(models.Model):

@@ -84,6 +84,7 @@ class GradeByUserUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.Upd
     template_name = 'edit_grade.html'
     form_class = NewGradeForm
 
+
     def test_func(self):
         return self.request.user
 
@@ -91,6 +92,7 @@ class GradeByUserDelateView(LoginRequiredMixin, UserPassesTestMixin, generic.Del
     model = Subject_grade
     success_url = "/school/mylessons/"
     template_name = 'delete_grade.html'
+
 
     def test_func(self):
         return self.request.user
@@ -100,6 +102,10 @@ class GradeByUserDelateView(LoginRequiredMixin, UserPassesTestMixin, generic.Del
 class LessonsByUserListView(LoginRequiredMixin, generic.ListView):
     model = User
     template_name = 'user_lessons.html'
+
+    class Meta:
+        ordering=['-date']
+
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)

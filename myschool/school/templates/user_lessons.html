@@ -14,6 +14,7 @@
                 <table class="table table-responsive-sm table-bordered table-striped table-sm text-nowrap">
                     <thead>
                     <tr>
+                        <th>Date</th>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Subject</th>
@@ -25,13 +26,14 @@
                         {% for subject in teacher.follows_subjects.all %}
                             {% for subject_grade in subject.subject_grade_set.all %}
                         <tr>
+                                <td class="align-middle">{{ subject_grade.date }}</td>
                                 <td class="align-middle">{{ subject_grade.subject.name }}</td>
                                 <td class="align-middle">{{ subject_grade.student.fname }}</td>
                                 <td class="align-middle">{{ subject_grade.student.lname }}</td>
                                 <td class="align-middle">{{ subject_grade.grade }}</td>
                                 <td>
-                                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'grade-update' teacher.id %}">Edit</a>
-                                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'grade-delete' teacher.id %}">Delete</a>
+                                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'grade-update' subject_grade.id %}">Edit</a>
+                                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'grade-delete' subject_grade.id %}">Delete</a>
                                 </td>
                         </tr>
                             {% endfor %}
