@@ -42,6 +42,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     fname = models.CharField(verbose_name="First name", max_length=150, null=True, blank=True)
     lname = models.CharField(verbose_name="Last name", max_length=150, null=True, blank=True)
     is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
 
     USER_CHOICES = [
         ('T', 'Teacher'),

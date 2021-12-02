@@ -25,4 +25,8 @@ li a {
 list-style: none;
 }
 
+li a:link {
+  text-decoration: none;
+}
+
 

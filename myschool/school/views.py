@@ -44,7 +44,7 @@ class TeachersListView(generic.ListView):
     model = User
     template_name = 'teachers.html'
     context_object_name = 'teachers_list'
-    paginate_by = 1
+    paginate_by = 5
     queryset = User.objects.filter(user_type='T')
 
 def teacher(request, teacher_id):
@@ -67,6 +67,7 @@ def search(request):
 class GradesByUserListView(LoginRequiredMixin, generic.ListView):
     model = Subject_grade
     template_name = 'user_grades.html'
+    paginate_by = 10
 
     def get_queryset(self):
         return Subject_grade.objects.filter(student=self.request.user)
@@ -102,6 +103,7 @@ class GradeByUserDelateView(LoginRequiredMixin, UserPassesTestMixin, generic.Del
 class LessonsByUserListView(LoginRequiredMixin, generic.ListView):
     model = User
     template_name = 'user_lessons.html'
+    paginate_by = 5
 
     class Meta:
         ordering=['-date']

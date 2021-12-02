@@ -128,6 +128,14 @@ STATICFILES_DIRS = (
   os.path.join(BASE_DIR, 'school/static'),
 )
 
+from .secret_setings import user, password
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_POST = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = user
+EMAIL_HOST_PASSWORD = password
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

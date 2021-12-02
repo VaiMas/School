@@ -2,10 +2,30 @@
 
 {% block content %}
 <div class="container teacher">
+    <img class="rounded-circle" src="{{teacher.profile.photo.url}}">
     <h4>{{ teacher.fname }} {{ teacher.lname }}</h4>
-    {% for subject in teacher.follows_subjects.all %}
-    <li>{{ subject }}</li>
-    {% endfor %}
+    <div class="row text-dark">
+    <div class="col col-lg-6">
+        <div class="card">
+    <div class="card-body">
+                <table class="table table-responsive-sm table-bordered table-striped table-sm text-nowrap">
+                    <thead>
+                    <tr>
+                        <th>Subjects:</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for subject in teacher.follows_subjects.all %}
+                        <tr>
+                                <td class="align-middle">{{ subject }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+</div>
+               </div>
+    </div>
 </div>
 
 {% endblock %}
