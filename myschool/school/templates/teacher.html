@@ -3,8 +3,8 @@
 {% block content %}
 <div class="container teacher">
     <h4>{{ teacher.fname }} {{ teacher.lname }}</h4>
-    {% for i in teacher.subjects.all %}
-    <li>{{ i.subject }}</li>
+    {% for subject in teacher.follows_subjects.all %}
+    <li>{{ subject }}</li>
     {% endfor %}
 </div>
 

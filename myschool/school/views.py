@@ -87,6 +87,14 @@ class GradeByUserUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.Upd
     def test_func(self):
         return self.request.user
 
+class GradeByUserDelateView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+    model = Subject_grade
+    success_url = "/school/mylessons/"
+    template_name = 'delete_grade.html'
+
+    def test_func(self):
+        return self.request.user
+
 
 
 class LessonsByUserListView(LoginRequiredMixin, generic.ListView):

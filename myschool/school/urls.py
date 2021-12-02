@@ -12,6 +12,7 @@ urlpatterns = [
     path('mylessons/', views.LessonsByUserListView.as_view(), name='my-lessons'),
     path('mylessons/new', views.GradeByUserCreateView.as_view(), name='grade-new'),
     path('mylessons/<int:pk>/update', views.GradeByUserUpdateView.as_view(), name='grade-update'),
+    path('mylessons/<int:pk>/delete', views.GradeByUserDelateView.as_view(), name='grade-delete'),
     path('profile/', views.profile, name='profile'),
 
 ]
