@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% load static %}
 
 {% block content %}
 <div class="container teacher">
@@ -11,7 +13,7 @@
                 <table class="table table-responsive-sm table-bordered table-striped table-sm text-nowrap">
                     <thead>
                     <tr>
-                        <th>Subjects:</th>
+                        <th>{% trans "Subjects:"%}</th>
                     </tr>
                     </thead>
                     <tbody>

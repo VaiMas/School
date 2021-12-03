@@ -4,6 +4,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.contrib.auth import get_user_model
 from PIL import Image
+from django.utils.translation import gettext_lazy as _
 
 class CustomUserManager(BaseUserManager):
     """
@@ -38,9 +39,9 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField('email address', unique=True)
-    fname = models.CharField(verbose_name="First name", max_length=150, null=True, blank=True)
-    lname = models.CharField(verbose_name="Last name", max_length=150, null=True, blank=True)
+    email = models.EmailField(_('email address'), unique=True)
+    fname = models.CharField(verbose_name=_("First name"), max_length=150, null=True, blank=True)
+    lname = models.CharField(verbose_name=_("Last name"), max_length=150, null=True, blank=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
@@ -96,7 +97,7 @@ class Profile(models.Model):
 
 # Create your models here.
 class Subject(models.Model):
-    name = models.CharField(verbose_name="Name", max_length=150)
+    name = models.CharField(verbose_name=_("Name"), max_length=150)
     teachers = models.ManyToManyField(User, related_name='follows_subjects')
 
     def __str__(self):
@@ -110,9 +111,9 @@ class Subject(models.Model):
 
 
 class Subject_grade(models.Model):
-    subject = models.ForeignKey('Subject', verbose_name='Subject', on_delete=models.CASCADE, null=True, blank=True)
+    subject = models.ForeignKey('Subject', verbose_name=_('Subject'), on_delete=models.CASCADE, null=True, blank=True)
     student = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    date = models.DateField(verbose_name='Date', null=True, blank=True)
+    date = models.DateField(verbose_name=_('Date'), null=True, blank=True)
 
     GRADE = (
         (1, '1'),
@@ -128,10 +129,10 @@ class Subject_grade(models.Model):
     )
 
     grade = models.IntegerField(
+        verbose_name=_('Grade'),
         choices=GRADE,
         null=True,
         blank=True,
-        help_text='Grade',
     )
 
     def __str__(self):
@@ -144,7 +145,7 @@ class Subject_grade(models.Model):
 
 
 class Lesson(models.Model):
-    subject = models.ForeignKey('Subject', verbose_name='Subject', on_delete=models.CASCADE, null=True, blank=True)
+    subject = models.ForeignKey('Subject', verbose_name=_('Subject'), on_delete=models.CASCADE, null=True, blank=True)
     student = models.ManyToManyField(User, related_name='follows_lessons')
 
     # def __str__(self):

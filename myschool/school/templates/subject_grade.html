@@ -1,7 +1,9 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% load static %}
 
 {% block content %}
-  <h1>Subjects:</h1>
+  <h1>{% trans "Subjects:"%}</h1>
   {% if subject_grade_list %}
   <ul>
     {% for subject in subject_grade_list %}

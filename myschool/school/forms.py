@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import CustomUser, Profile, Subject_grade
+from .models import CustomUser, Profile, Subject_grade, Subject
 from django import forms
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -26,4 +26,5 @@ class NewGradeForm(forms.ModelForm):
         super(NewGradeForm, self).__init__(*args, **kwargs)
         if self.instance:
             self.fields['student'].queryset = User.objects.filter(user_type="S")
+
 

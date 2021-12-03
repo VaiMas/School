@@ -1,7 +1,9 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% load static %}
 
 {% block content %}
-  <h1>Our students:</h1>
+  <h1>{% trans "My order:"%}Our students:</h1>
   {% for student in students %}
     <li>{{student.fname}} {{student.lname}} Parents: {{student.parent.fname}} {{student.parent.lname}}</li>
     {% endfor %}
