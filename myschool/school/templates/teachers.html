@@ -3,7 +3,7 @@
 {% block content %}
   <h1>Our teachers:</h1>
   {% for teacher in teachers_list %}
-    <li><a href="{% url 'teacher' teacher.id %}">{{teacher.fname}} {{teacher.lname}}</a></li>
+    <li><a href="{% url 'teacher' teacher.id %}" class="text-light">{{teacher.fname}} {{teacher.lname}}</a></li>
     {% endfor %}
 <div class="row">
     <div class="col-md-12">

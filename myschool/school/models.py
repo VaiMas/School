@@ -140,7 +140,7 @@ class Subject_grade(models.Model):
     class Meta:
         verbose_name = "Subject grade"
         verbose_name_plural = 'Subject grades'
-        ordering = ['-date']
+
 
 
 class Lesson(models.Model):
